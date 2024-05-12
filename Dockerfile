@@ -1,33 +1,11 @@
-FROM pstauffer/curl:v1.0.3
+FROM alpine:3.14
 
-MAINTAINER pstauffer@confirm.ch
-
-#
-# Install all required dependencies.
-#
+MAINTAINER github@snry.me
 
 RUN apk --update upgrade && \
     apk add --update inotify-tools && \
+    apk add yq --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community && \
     rm -rf /var/cache/apk/*
 
-
-#
-# Add named init script.
-#
-
-ADD init.sh /init.sh
-RUN chmod 750 /init.sh
-
-
-#
-# Define container settings.
-#
-
-WORKDIR /tmp
-
-
-#
-# Start named.
-#
-
-CMD ["/init.sh"]
+# Run the sleep command indefinitely
+CMD ["sleep", "infinity"]
